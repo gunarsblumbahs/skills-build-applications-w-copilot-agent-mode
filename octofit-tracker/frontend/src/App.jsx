@@ -1,4 +1,23 @@
 function App() {
+  const getApiBaseUrl = () => {
+    const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+    if (configuredBaseUrl) {
+      return configuredBaseUrl;
+    }
+
+    const hostname = window.location.hostname;
+
+    if (hostname.includes('app.github.dev')) {
+      const codespaceName = hostname.replace(/-5173\.app\.github\.dev$/, '');
+      return `https://${codespaceName}-8000.app.github.dev`;
+    }
+
+    return 'http://localhost:8000';
+  };
+
+  const apiBaseUrl = getApiBaseUrl();
+
   return (
     <main className="container py-5">
       <div className="row justify-content-center">
@@ -12,7 +31,7 @@ function App() {
                 and MongoDB connectivity for the data tier.
               </p>
               <div className="d-flex gap-3">
-                <a className="btn btn-primary btn-lg" href="http://localhost:8000/api/health">
+                <a className="btn btn-primary btn-lg" href={`${apiBaseUrl}/api/health`}>
                   Check API Health
                 </a>
                 <a className="btn btn-outline-secondary btn-lg" href="https://vite.dev/guide/" target="_blank" rel="noreferrer">
