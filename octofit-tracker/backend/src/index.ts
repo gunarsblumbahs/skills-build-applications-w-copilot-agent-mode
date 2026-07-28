@@ -17,6 +17,7 @@ const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db'
 const getApiBaseUrl = () => {
   const codespaceName = process.env.CODESPACE_NAME;
 //  const codespaceName = 'my-demo-gb';
+console.log('GB TS CODESPACE_NAME:', codespaceName);
   return codespaceName
     ? `https://${codespaceName}-8000.app.github.dev`
     : 'http://localhost:8000';
